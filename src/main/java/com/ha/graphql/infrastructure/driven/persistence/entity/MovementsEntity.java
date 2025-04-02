@@ -1,9 +1,7 @@
 package com.ha.graphql.infrastructure.driven.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -31,5 +29,5 @@ public class MovementsEntity {
     private Double amount;
 
     @Column(nullable = false)
-    private String createdAt;
+    private LocalDateTime createdAt;
 }
