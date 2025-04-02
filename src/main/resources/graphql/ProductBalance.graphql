@@ -1,8 +1,0 @@
-type Query {
-    getBalance: Balance
-}
-
-type Balance {
-    id: String,
-
-}
