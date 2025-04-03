@@ -38,10 +38,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     compileOnly "org.projectlombok:lombok:${versions.lombok}"
+    annotationProcessor 'org.projectlombok:lombok'
+
     implementation "org.mapstruct:mapstruct:${versions.mapstruct}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${versions.mapstruct}"
 
-    annotationProcessor 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
