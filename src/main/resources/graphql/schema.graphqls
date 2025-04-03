@@ -1,9 +1,40 @@
 type Query {
-    getAccount(id: ID):Account
+    getAccount(id: ID!):Account!
+    getCreditCard(id: ID!): CreditCard!
+    getCredit(id: ID!): Credit!
+    getProduct(id: ID!): Products!
 }
 
 type Account {
     id: ID,
-    productId: String,
-    balance: Float
+    product: Products,
+    balance: Float,
+    movements: [Movements],
+}
+
+type CreditCard {
+    id: ID,
+    product: Products,
+    balance: Float,
+    movements: [Movements],
+}
+
+type Credit {
+    id: ID,
+    product: Products,
+    balance: Float,
+    movements:[Movements]
+}
+
+type Movements {
+    id: ID,
+    transactionDate: String,
+    description: String,
+    amount: String
+}
+
+type Products {
+    id: ID,
+    number: String,
+    type: String,
 }
