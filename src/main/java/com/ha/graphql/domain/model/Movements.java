@@ -1,11 +1,11 @@
 package com.ha.graphql.domain.model;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * DTO for {@link com.ha.graphql.infrastructure.driven.persistence.entity.MovementsEntity}
- */
+@Builder
 public record Movements(Long id, Product product, LocalDateTime transactionDate, String description, Double amount,
                         String createdAt) implements Serializable {
 }
