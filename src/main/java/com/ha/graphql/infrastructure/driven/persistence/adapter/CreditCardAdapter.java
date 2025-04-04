@@ -33,4 +33,12 @@ public class CreditCardAdapter implements CreditCardPort {
 		log.debug("[END] -> Persistence - Retrieving creditCard with id {}", id);
 		return creditCardMapper.toDto(creditCardEntity);
 	}
+
+	@Override
+	public CreditCard getByProductId(Long productId) {
+		log.debug("[START] -> Persistence - Retrieving creditCard with product id {}", productId);
+		CreditCardEntity creditCardEntity = creditCardEntityRepository.findByProduct_Id(productId).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving creditCard with product id {}", productId);
+		return creditCardMapper.toDto(creditCardEntity);
+	}
 }

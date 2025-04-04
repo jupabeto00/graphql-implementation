@@ -32,4 +32,12 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
+	@Override
+	public Account retrieveByProductId(Long productId) {
+		log.debug("[START] ->  Retrieving account with product id {}", productId);
+		Account account = accountPort.getByProductId(productId);
+
+		log.debug("[END] ->  Retrieving account with product id {}", productId);
+		return account;
+	}
 }

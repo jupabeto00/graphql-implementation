@@ -4,4 +4,5 @@ import com.ha.graphql.domain.model.Account;
 
 public interface AccountPort {
 	Account getById(Long id);
+	Account getByProductId(Long id);
 }

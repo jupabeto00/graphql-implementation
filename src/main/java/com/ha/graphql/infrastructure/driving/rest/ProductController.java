@@ -2,6 +2,7 @@ package com.ha.graphql.infrastructure.driving.rest;
 
 import com.ha.graphql.application.port.*;
 import com.ha.graphql.domain.model.*;
+import com.ha.graphql.infrastructure.driving.model.ProductFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -20,6 +21,7 @@ public class ProductController {
 	private CreditService creditService;
 	private ProductService productService;
 	private MovementsService movementsService;
+	private UserService userService;
 
 	@Autowired
 	public void setAccountService(AccountService accountService) {
@@ -46,6 +48,11 @@ public class ProductController {
 		this.movementsService = movementsService;
 	}
 
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@QueryMapping()
 	public Account getAccount(@Argument Long id) {
 			return accountService.retrieveById(id);
@@ -62,8 +69,43 @@ public class ProductController {
 	}
 
 	@QueryMapping()
-	public Product getProduct(@Argument Long id) {
-		return productService.retrieveById(id);
+	public List<Product> getProducts(@Argument ProductFilter filter) {
+		if (filter.id() != null && filter.userId() != null) {
+			Product product = productService.findByIdAndUserId(filter.id(), filter.userId());
+			return product != null ? List.of(product) : List.of();
+		} else if (filter.id() != null) {
+			Product product = productService.retrieveById(filter.id());
+			return product != null ? List.of(product) : List.of();
+		} else if (filter.userId() != null) {
+			return productService.retrieveByUserId(filter.userId());
+		} else {
+			throw new IllegalArgumentException("At least one field must be provided in filter");
+		}
+	}
+
+	@QueryMapping()
+	public User getUser(@Argument Long id, @Argument String name) {
+		return userService.retrieveById(id);
+	}
+
+	@SchemaMapping
+	public User user(Product product) {
+		return userService.retrieveById(product.user().id());
+	}
+
+	@SchemaMapping
+	public Account account(Product product) {
+		return accountService.retrieveByProductId(product.id());
+	}
+
+	@SchemaMapping
+	public CreditCard creditCard(Product product) {
+		return creditCardService.retrieveByProductId(product.id());
+	}
+
+	@SchemaMapping
+	public Credit credit(Product product) {
+		return creditService.retrieveByProductId(product.id());
 	}
 
 	@SchemaMapping

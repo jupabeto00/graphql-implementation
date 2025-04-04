@@ -31,4 +31,13 @@ public class CreditCardServiceImpl implements CreditCardService {
 		log.debug("[END] ->  Retrieving creditCard with id {}", id);
 		return creditCard;
 	}
+
+	@Override
+	public CreditCard retrieveByProductId(Long id) {
+		log.debug("[START] ->  Retrieving creditCard with product id {}", id);
+		CreditCard creditCard = creditCardPort.getByProductId(id);
+
+		log.debug("[END] ->  Retrieving creditCard with product id {}", id);
+		return creditCard;
+	}
 }

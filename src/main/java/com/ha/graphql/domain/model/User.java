@@ -6,5 +6,5 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Builder
-public record Product(Long id, User user, String number, String type, LocalDateTime createdDate) implements Serializable {
-  }
+public record User(Long id, String name, LocalDateTime createdDate) implements Serializable {
+}

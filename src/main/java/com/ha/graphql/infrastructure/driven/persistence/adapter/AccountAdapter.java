@@ -33,4 +33,12 @@ public class AccountAdapter implements AccountPort {
 		log.debug("[END] -> Persistence - Retrieving account with id {}", id);
 		return accountMapper.toDto(accountEntity);
 	}
+
+	@Override
+	public Account getByProductId(Long productId) {
+		log.debug("[START] -> Persistence - Retrieving account with product id {}", productId);
+		AccountEntity accountEntity = accountRepository.findByProduct_Id(productId).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving account with product id {}", productId);
+		return accountMapper.toDto(accountEntity);
+	}
 }

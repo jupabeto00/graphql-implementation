@@ -9,21 +9,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "products")
-public class ProductEntity {
+@Table(name = "users")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
-
     @Column(nullable = false)
-    private String number;
-
-    @Column(nullable = false)
-    private String type;
+    private String name;
 
     @Column(nullable = false)
     private LocalDateTime createdDate;

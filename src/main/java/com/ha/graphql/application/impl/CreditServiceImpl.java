@@ -31,4 +31,14 @@ public class CreditServiceImpl implements CreditService {
 		log.debug("[END] ->  Retrieving credit with id {}", id);
 		return credit;
 	}
+
+	@Override
+	public Credit retrieveByProductId(Long id) {
+		log.debug("[START] ->  Retrieving credit with product id {}", id);
+		Credit credit = creditPort.getByProductId(id);
+
+		log.debug("[END] ->  Retrieving credit with product id {}", id);
+		return credit;
+	}
 }
+
