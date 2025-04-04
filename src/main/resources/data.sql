@@ -1,9 +1,14 @@
-INSERT INTO products (number, type, created_date)
-VALUES ('12345', 'Ahorro', '2023-01-01'),
-       ('4567', 'Ahorro', '2023-01-01'),
-       ('098123','Ahorro', '2023-01-01'),
-       ('6785', 'Crédito', '2023-01-01'),
-       ('123789', 'Tarjeta Crédito', '2023-01-01');
+INSERT INTO users (name, created_date)
+VALUES ( 'Juan', '2023-01-01' ),
+( 'Pedro', '2023-01-01' ),
+( 'Tomas', '2023-01-01' );
+
+INSERT INTO products (user_id, number, type, created_date)
+VALUES ('1', '12345', 'Ahorro', '2023-01-01'),
+       ('2', '4567', 'Ahorro', '2023-01-01'),
+       ('3', '098123','Ahorro', '2023-01-01'),
+       ('1', '6785', 'Crédito', '2023-01-01'),
+       ('3', '123789', 'Tarjeta Crédito', '2023-01-01');
 
 INSERT INTO accounts (product_id, balance)
 VALUES (1, 5000.0),

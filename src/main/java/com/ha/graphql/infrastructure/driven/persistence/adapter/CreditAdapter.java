@@ -33,4 +33,12 @@ public class CreditAdapter implements CreditPort {
 		log.debug("[END] -> Persistence - Retrieving credit with id {}", id);
 		return creditMapper.toDto(creditEntity);
 	}
+
+	@Override
+	public Credit getByProductId(Long productId) {
+		log.debug("[START] -> Persistence - Retrieving credit with product id {}", productId);
+		CreditEntity creditEntity = creditEntityRepository.findByProduct_Id(productId).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving credit with product id {}", productId);
+		return creditMapper.toDto(creditEntity);
+	}
 }

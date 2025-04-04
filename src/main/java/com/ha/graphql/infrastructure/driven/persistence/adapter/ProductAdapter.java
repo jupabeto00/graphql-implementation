@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class ProductAdapter implements ProductPort {
@@ -31,6 +33,22 @@ public class ProductAdapter implements ProductPort {
 		log.debug("[START] -> Persistence - Retrieving product with id {}", id);
 		ProductEntity product = productEntityRepository.findById(id).orElse(null);
 		log.debug("[END] -> Persistence - Retrieving product with id {}", id);
+		return productMapper.toDto(product);
+	}
+
+	@Override
+	public Product getByIdAndUserId(Long id, Integer userId) {
+		log.debug("[START] -> Persistence - Retrieving product with id {} and userId {}", id, userId);
+		ProductEntity product = productEntityRepository.findByIdAndUser_Id(id, Long.valueOf(userId)).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving product with id {} and userId {}", id, userId);
+		return productMapper.toDto(product);
+	}
+
+	@Override
+	public List<Product> getByUserId(Integer userId) {
+		log.debug("[START] -> Persistence - Retrieving product with userId {}", userId);
+		List<ProductEntity> product = productEntityRepository.findByUser_Id(Long.valueOf(userId)).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving product with userId {}", userId);
 		return productMapper.toDto(product);
 	}
 }

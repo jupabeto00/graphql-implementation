@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,6 +31,32 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		log.debug("[END] ->  Retrieving product with id {}", id);
+		return product;
+	}
+
+	@Override
+	public Product findByIdAndUserId(Long id, Integer userId) {
+		log.debug("[START] ->  Retrieving product with id {} and userId {}", id, userId);
+		Product product = productPort.getByIdAndUserId(id, userId);
+
+		if (product == null) {
+			throw new PersistenceError("ID", "Product ID not found.");
+		}
+
+		log.debug("[END] ->  Retrieving product with id {} and userId {}", id, userId);
+		return product;
+	}
+
+	@Override
+	public List<Product> retrieveByUserId(Integer userId) {
+		log.debug("[START] ->  Retrieving product with userId {}", userId);
+		List<Product> product = productPort.getByUserId(userId);
+
+		if (product == null) {
+			throw new PersistenceError("ID", "Product ID not found.");
+		}
+
+		log.debug("[END] ->  Retrieving product with userId {}", userId);
 		return product;
 	}
 }

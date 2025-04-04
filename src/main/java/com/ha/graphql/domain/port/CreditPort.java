@@ -4,4 +4,5 @@ import com.ha.graphql.domain.model.Credit;
 
 public interface CreditPort {
 	Credit getById(Long id);
+	Credit getByProductId(Long id);
 }
