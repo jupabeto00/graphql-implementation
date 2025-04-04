@@ -2,7 +2,6 @@ package com.ha.graphql.application.impl;
 
 import com.ha.graphql.application.port.UserService;
 import com.ha.graphql.domain.exception.PersistenceError;
-import com.ha.graphql.domain.model.Product;
 import com.ha.graphql.domain.model.User;
 import com.ha.graphql.domain.port.UserPort;
 import lombok.extern.slf4j.Slf4j;
