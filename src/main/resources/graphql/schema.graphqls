@@ -1,8 +1,3 @@
-input ProductFilter {
-    number: String,
-    userId: Int
-}
-
 type Query {
     getProducts(filter: ProductFilter): [Product!]!
     getUser(id: ID): User!
@@ -10,40 +5,13 @@ type Query {
     getAccount(productId: ID!):Account!
     getCreditCard(productId: ID!): CreditCard!
     getCredit(productId: ID!): Credit!
+
+    getMovements(productId: ID!, first: Int, after: String, last: Int, before: String): MovementsConnection!
 }
 
-type Account {
-    id: ID,
-    balance: Float,
-    movements: [Movements],
-}
-
-type CreditCard {
-    id: ID,
-    balance: Float,
-    movements: [Movements],
-}
-
-type Credit {
-    id: ID,
-    balance: Float,
-    movements:[Movements]
-}
-
-type Movements {
-    id: ID,
-    transactionDate: String,
-    description: String,
-    amount: String
-}
-
-type Product{
-    id: ID,
-    number: String,
-    type: String,
-}
-
-type User {
-    id: ID,
-    name: String
+type PageInfo {
+    startCursor: String
+    endCursor: String
+    hasNextPage: Boolean
+    hasPreviousPage: Boolean
 }
