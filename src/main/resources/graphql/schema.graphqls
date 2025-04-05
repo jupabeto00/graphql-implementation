@@ -1,34 +1,31 @@
 input ProductFilter {
-    id: ID,
     number: String,
     userId: Int
 }
 
 type Query {
-    getAccount(id: ID!):Account!
-    getCreditCard(id: ID!): CreditCard!
-    getCredit(id: ID!): Credit!
     getProducts(filter: ProductFilter): [Product!]!
-    getUser(id: ID, name: String): User!
+    getUser(id: ID): User!
+
+    getAccount(productId: ID!):Account!
+    getCreditCard(productId: ID!): CreditCard!
+    getCredit(productId: ID!): Credit!
 }
 
 type Account {
     id: ID,
-    product: Product,
     balance: Float,
     movements: [Movements],
 }
 
 type CreditCard {
     id: ID,
-    product: Product,
     balance: Float,
     movements: [Movements],
 }
 
 type Credit {
     id: ID,
-    product: Product,
     balance: Float,
     movements:[Movements]
 }
@@ -42,12 +39,8 @@ type Movements {
 
 type Product{
     id: ID,
-    user: User,
     number: String,
     type: String,
-    account: Account,
-    creditCard: CreditCard,
-    credit: Credit,
 }
 
 type User {

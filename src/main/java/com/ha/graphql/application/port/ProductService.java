@@ -5,7 +5,7 @@ import com.ha.graphql.domain.model.Product;
 import java.util.List;
 
 public interface ProductService {
-	Product retrieveById(Long id);
-	Product findByIdAndUserId(Long id, Integer userId);
+	Product retrieveByNumber(String number);
+	Product findByNumberAndUserId(String number, Integer userId);
 	List<Product> retrieveByUserId(Integer userId);
 }
