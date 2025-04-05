@@ -33,12 +33,4 @@ public class UserAdapter implements UserPort {
 		log.debug("[END] -> Persistence - Retrieving user with id {}", id);
 		return userMapper.toDto(user);
 	}
-
-	@Override
-	public User getByName(String name) {
-		log.debug("[START] -> Persistence - Retrieving user with name {}", name);
-		UserEntity user = userEntityRepository.findByName(name);
-		log.debug("[END] -> Persistence - Retrieving user with name {}", name);
-		return user != null ? userMapper.toDto(user) : null;
-	}
 }
