@@ -22,28 +22,28 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product retrieveById(Long id) {
-		log.debug("[START] ->  Retrieving product with id {}", id);
-		Product product = productPort.getById(id);
+	public Product retrieveByNumber(String number) {
+		log.debug("[START] ->  Retrieving product with number {}", number);
+		Product product = productPort.getByNumber(number);
 
 		if (product == null) {
 			throw new PersistenceError("ID", "Product ID not found.");
 		}
 
-		log.debug("[END] ->  Retrieving product with id {}", id);
+		log.debug("[END] ->  Retrieving product with number {}", number);
 		return product;
 	}
 
 	@Override
-	public Product findByIdAndUserId(Long id, Integer userId) {
-		log.debug("[START] ->  Retrieving product with id {} and userId {}", id, userId);
-		Product product = productPort.getByIdAndUserId(id, userId);
+	public Product findByNumberAndUserId(String number, Integer userId) {
+		log.debug("[START] ->  Retrieving product with number {} and userId {}", number, userId);
+		Product product = productPort.getByNumberAndUserId(number, userId);
 
 		if (product == null) {
 			throw new PersistenceError("ID", "Product ID not found.");
 		}
 
-		log.debug("[END] ->  Retrieving product with id {} and userId {}", id, userId);
+		log.debug("[END] ->  Retrieving product with number {} and userId {}", number, userId);
 		return product;
 	}
 

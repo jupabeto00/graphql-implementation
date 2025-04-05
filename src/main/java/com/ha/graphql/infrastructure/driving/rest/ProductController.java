@@ -54,27 +54,27 @@ public class ProductController {
 	}
 
 	@QueryMapping()
-	public Account getAccount(@Argument Long id) {
-			return accountService.retrieveById(id);
+	public Account getAccount(@Argument Long productId) {
+			return accountService.retrieveByProductId(productId);
 	}
 
 	@QueryMapping()
-	public CreditCard getCreditCard(@Argument Long id) {
-		return creditCardService.retrieveById(id);
+	public CreditCard getCreditCard(@Argument Long productId) {
+		return creditCardService.retrieveByProductId(productId);
 	}
 
 	@QueryMapping()
-	public Credit getCredit(@Argument Long id) {
-		return creditService.retrieveById(id);
+	public Credit getCredit(@Argument Long productId) {
+		return creditService.retrieveByProductId(productId);
 	}
 
 	@QueryMapping()
 	public List<Product> getProducts(@Argument ProductFilter filter) {
-		if (filter.id() != null && filter.userId() != null) {
-			Product product = productService.findByIdAndUserId(filter.id(), filter.userId());
+		if (filter.number() != null && filter.userId() != null) {
+			Product product = productService.findByNumberAndUserId(filter.number(), filter.userId());
 			return product != null ? List.of(product) : List.of();
-		} else if (filter.id() != null) {
-			Product product = productService.retrieveById(filter.id());
+		} else if (filter.number() != null) {
+			Product product = productService.retrieveByNumber(filter.number());
 			return product != null ? List.of(product) : List.of();
 		} else if (filter.userId() != null) {
 			return productService.retrieveByUserId(filter.userId());
@@ -84,42 +84,22 @@ public class ProductController {
 	}
 
 	@QueryMapping()
-	public User getUser(@Argument Long id, @Argument String name) {
+	public User getUser(@Argument Long id) {
 		return userService.retrieveById(id);
 	}
 
 	@SchemaMapping
-	public User user(Product product) {
-		return userService.retrieveById(product.user().id());
-	}
-
-	@SchemaMapping
-	public Account account(Product product) {
-		return accountService.retrieveByProductId(product.id());
-	}
-
-	@SchemaMapping
-	public CreditCard creditCard(Product product) {
-		return creditCardService.retrieveByProductId(product.id());
-	}
-
-	@SchemaMapping
-	public Credit credit(Product product) {
-		return creditService.retrieveByProductId(product.id());
-	}
-
-	@SchemaMapping
 	public List<Movements> movements(Account account) {
-			return movementsService.retrieveMovementsByProductId(account.id());
+			return movementsService.retrieveMovementsByProductId(account.product().id());
 	}
 
 	@SchemaMapping
 	public List<Movements> movements(CreditCard creditCard) {
-		return movementsService.retrieveMovementsByProductId(creditCard.id());
+		return movementsService.retrieveMovementsByProductId(creditCard.product().id());
 	}
 
 	@SchemaMapping
 	public List<Movements> movements(Credit credit) {
-		return movementsService.retrieveMovementsByProductId(credit.id());
+		return movementsService.retrieveMovementsByProductId(credit.product().id());
 	}
 }

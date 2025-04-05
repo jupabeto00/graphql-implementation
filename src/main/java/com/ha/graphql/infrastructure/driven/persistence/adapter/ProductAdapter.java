@@ -29,18 +29,18 @@ public class ProductAdapter implements ProductPort {
 	}
 
 	@Override
-	public Product getById(Long id) {
-		log.debug("[START] -> Persistence - Retrieving product with id {}", id);
-		ProductEntity product = productEntityRepository.findById(id).orElse(null);
-		log.debug("[END] -> Persistence - Retrieving product with id {}", id);
+	public Product getByNumber(String number) {
+		log.debug("[START] -> Persistence - Retrieving product with number {}", number);
+		ProductEntity product = productEntityRepository.findByNumber(number).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving product with number {}", number);
 		return productMapper.toDto(product);
 	}
 
 	@Override
-	public Product getByIdAndUserId(Long id, Integer userId) {
-		log.debug("[START] -> Persistence - Retrieving product with id {} and userId {}", id, userId);
-		ProductEntity product = productEntityRepository.findByIdAndUser_Id(id, Long.valueOf(userId)).orElse(null);
-		log.debug("[END] -> Persistence - Retrieving product with id {} and userId {}", id, userId);
+	public Product getByNumberAndUserId(String number, Integer userId) {
+		log.debug("[START] -> Persistence - Retrieving product with number {} and userId {}", number, userId);
+		ProductEntity product = productEntityRepository.findByNumberAndUser_Id(number, Long.valueOf(userId)).orElse(null);
+		log.debug("[END] -> Persistence - Retrieving product with number {} and userId {}", number, userId);
 		return productMapper.toDto(product);
 	}
 
