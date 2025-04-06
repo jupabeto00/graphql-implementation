@@ -2,6 +2,8 @@ package com.ha.graphql.infrastructure.driving.rest;
 
 import com.ha.graphql.application.port.*;
 import com.ha.graphql.domain.model.*;
+import com.ha.graphql.domain.model.graphql.CursorInfo;
+import com.ha.graphql.domain.model.graphql.MovementsConnection;
 import com.ha.graphql.infrastructure.driving.model.ProductFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +57,7 @@ public class ProductController {
 
 	@QueryMapping()
 	public Account getAccount(@Argument Long productId) {
-			return accountService.retrieveByProductId(productId);
+		return accountService.retrieveByProductId(productId);
 	}
 
 	@QueryMapping()
@@ -88,18 +90,30 @@ public class ProductController {
 		return userService.retrieveById(id);
 	}
 
-	@SchemaMapping
-	public List<Movements> movements(Account account) {
+	@QueryMapping
+	public MovementsConnection getMovements(@Argument Long productId,
+	                                        @Argument("first") Integer first,
+	                                        @Argument("after") String after,
+	                                        @Argument("last") Integer last,
+	                                        @Argument("before") String before
+	) {
+
+		return movementsService.retrieveMovementsByProductIdPaginated(productId, new CursorInfo(first, after, last, before) );
+	}
+
+		@SchemaMapping
+		public List<Movements> movements (Account account){
+
 			return movementsService.retrieveMovementsByProductId(account.product().id());
-	}
+		}
 
-	@SchemaMapping
-	public List<Movements> movements(CreditCard creditCard) {
-		return movementsService.retrieveMovementsByProductId(creditCard.product().id());
-	}
+		@SchemaMapping
+		public List<Movements> movements (CreditCard creditCard){
+			return movementsService.retrieveMovementsByProductId(creditCard.product().id());
+		}
 
-	@SchemaMapping
-	public List<Movements> movements(Credit credit) {
-		return movementsService.retrieveMovementsByProductId(credit.product().id());
+		@SchemaMapping
+		public List<Movements> movements (Credit credit){
+			return movementsService.retrieveMovementsByProductId(credit.product().id());
+		}
 	}
-}

@@ -1,0 +1,10 @@
+input ProductFilter {
+    number: String,
+    userId: Int
+}
+
+type Product{
+    id: ID,
+    number: String,
+    type: String,
+}

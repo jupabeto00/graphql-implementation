@@ -1,0 +1,5 @@
+type CreditCard {
+    id: ID,
+    balance: Float,
+    movements: [MovementsConnection],
+}

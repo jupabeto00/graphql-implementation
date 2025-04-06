@@ -31,17 +31,4 @@ public class UserServiceImpl implements UserService {
 		log.debug("[END] ->  Retrieving user with id {}", id);
 		return user;
 	}
-
-	@Override
-	public User retrieveByName(String name) {
-		log.debug("[START] ->  Retrieving user with name {}", name);
-		User user = userPort.getByName(name);
-
-		if (user == null) {
-			throw new PersistenceError("ID", "User Name not found.");
-		}
-
-		log.debug("[END] ->  Retrieving user with Name {}", name);
-		return user;
-	}
 }

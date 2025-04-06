@@ -1,0 +1,16 @@
+type MovementsConnection {
+    edges: [MovementsEdge]
+    pageInfo: PageInfo!
+}
+
+type MovementsEdge {
+    cursor: String
+    node: Movements!
+}
+
+type Movements {
+    id: ID,
+    transactionDate: String,
+    description: String,
+    amount: String
+}
